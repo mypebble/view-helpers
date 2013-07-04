@@ -6,7 +6,7 @@ setup(
     description="",
     author="SF Software limited t/a Pebble",
     author_email="sdev@talktopebble.co.uk",
-    url="https://www.mypebble.co.uk",
+    url="https://bitbucket.org/pebble/pebble-view-helpers",
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
