@@ -12,4 +12,5 @@ To test this project, create a virtualenv and install the requirements.txt:
 
     virtualenv .
     bin/pip install -r requirements.txt
+    bin/python setup.py install
     bin/python test_project/manage.py test
