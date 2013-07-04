@@ -16,6 +16,13 @@ class CurrentDateTimeMixin(object):
     specific point during the testing environment.
     """
     def dispatch(self, request, *args, **kwargs):
+        """Set the datetime for the request.
+        """
+        self.set_datetime(request)
+        return super(
+            CurrentDateTimeMixin, self).dispatch(request, *args, **kwargs)
+
+    def set_datetime(self, request):
         """Freezes the datetime of the request. If TESTING is True, also reads
         the request arguments for a TEST_DATETIME that allows us to freeze
         the datetime during a testing environment.
@@ -27,9 +34,6 @@ class CurrentDateTimeMixin(object):
             self._datetime = parser.parse(request_args[DATETIME])
         else:
             self._datetime = datetime.now()
-
-        return super(
-            CurrentDateTimeMixin, self).dispatch(request, *args, **kwargs)
 
     def get_date(self):
         """Get the date of the request starting.
