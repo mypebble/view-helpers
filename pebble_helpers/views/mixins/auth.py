@@ -6,9 +6,13 @@ class LoginRequiredMixin(object):
     view.
     Simply inherit from this class to get the benefits.
     """
+    redirect_field_name = 'next'
+
     @classmethod
     def as_view(cls, **initkwargs):
         """
         """
         view = super(LoginRequiredMixin, cls).as_view
-        return login_required(view(**initkwargs))
+        return login_required(
+                view(**initkwargs),
+                redirect_field_name=cls.redirect_field_name)

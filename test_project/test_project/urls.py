@@ -5,6 +5,9 @@ from test_project.formtest.views import (FailureUrlView, FailureUrlArgView,
         FailureUrlKwargView, FailureUrlArgKwargView, SuccessUrlView,
         SuccessUrlArgView, SuccessUrlKwargView, SuccessUrlArgKwargView)
 
+from test_project.authtest.views import (LoginRequired, LoginRequiredRedirect,
+        LoginView)
+
 
 urlpatterns = patterns('',
     url(r'^success/plain/$',
@@ -32,4 +35,16 @@ urlpatterns = patterns('',
     url(r'^failure/argkwarg/(?P<i>\d+)/$',
         FailureUrlArgKwargView.as_view(),
         name='testproject-failure-argkwarg'),
+)
+
+urlpatterns += patterns('',
+    url(r'login/$',
+        LoginView.as_view(),
+        name='login'),
+    url(r'^auth/plain/$',
+        LoginRequired.as_view(),
+        name='authtest-login'),
+    url(r'^auth/redirect/$',
+        LoginRequiredRedirect.as_view(),
+        name='authtest-redirect'),
 )

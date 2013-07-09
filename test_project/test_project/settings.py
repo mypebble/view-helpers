@@ -4,6 +4,8 @@ DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
 
+LOGIN_URL = '/login/'
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -133,6 +135,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
     'test_project.timetest',
+    'test_project.authtest',
 )
 
 # A sample logging configuration. The only tangible logging
