@@ -72,3 +72,25 @@ class RedirectReverseMixin(object):
             reverse_kwargs['kwargs'] = kwargs
 
         return reverse_kwargs
+
+
+class FormRedirectMixin(object):
+    """Checks for redirect_field_name in the submitted request. The value of
+    this is used to redirect the user to another page upon validating the form.
+    If the redirect field is not set, then this mixin falls back to the view's
+    default behaviour.
+
+    This mixin is currently incompatible with RedirectReverseMixin.
+    """
+    redirect_field_name = 'next'
+
+    def form_valid(self, form):
+        method_dict = getattr(self.request, self.request.method)
+        next_url = method_dict.get(self.redirect_field_name)
+        if next_url is None and self.request.method != 'GET':
+            next_url = self.request.GET.get(self.redirect_field_name)
+
+        if next_url is not None:
+            self.success_url = next_url
+
+        return super(FormRedirectMixin, self).form_valid(form)
