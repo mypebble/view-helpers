@@ -1,5 +1,8 @@
 from django.conf.urls.defaults import url, patterns
+from django.contrib.auth.views import login
 
+
+from pebble_helpers.views.mixins.auth import already_logged_in
 
 from test_project.formtest.views import (FailureUrlView, FailureUrlArgView,
         FailureUrlKwargView, FailureUrlArgKwargView, SuccessUrlView,
@@ -47,4 +50,16 @@ urlpatterns += patterns('',
     url(r'^auth/redirect/$',
         LoginRequiredRedirect.as_view(),
         name='authtest-redirect'),
+)
+
+urlpatterns += patterns('',
+    url(r'^already_logged_in/$',
+        already_logged_in(login),
+        name='logged-in'),
+    url(r'^arbitrary_url/$',
+        LoginView.as_view(),
+        name='arbitrary-view'),
+    url(r'^settings_defined/$',
+        LoginView.as_view(),
+        name='settings-defined'),
 )

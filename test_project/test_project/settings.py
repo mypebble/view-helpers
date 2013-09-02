@@ -1,10 +1,14 @@
-# Django settings for test_project project.
+"""Settings file for the test_project that we use to test the bits of view
+functionality.
+"""
+from os.path import dirname, join
 
 DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
 
 LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/settings_defined/'
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -120,6 +124,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    join(dirname(__file__), 'templates'),
 )
 
 INSTALLED_APPS = (

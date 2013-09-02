@@ -1,4 +1,36 @@
+from django.conf import settings
+from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.shortcuts import redirect, resolve_url
+from django.utils.http import is_safe_url
+
 from django.contrib.auth.decorators import login_required
+
+
+def already_logged_in(login_function):
+    """Wraps login_function with a redirect to the desired URL if the user is
+    already logged in.
+    """
+    def check_login(request, *args, **kwargs):
+        """Checks whether the user is logged in or not. If they are, redirects
+        to the "next" parameter, otherwise displays the login_function.
+        """
+        if request.method == 'GET' and request.user.is_authenticated():
+            redirect_field_name = kwargs.get(
+                'redirect_field_name', REDIRECT_FIELD_NAME)
+
+            redirect_to = request.REQUEST.get(
+                redirect_field_name, settings.LOGIN_REDIRECT_URL)
+
+            if not is_safe_url(url=redirect_to, host=request.get_host()):
+                redirect_to = resolve_url(settings.LOGIN_REDIRECT_URL)
+
+            rtn = redirect(redirect_to)
+        else:
+            rtn = login_function(request, *args, **kwargs)
+
+        return rtn
+
+    return check_login
 
 
 class LoginRequiredMixin(object):
