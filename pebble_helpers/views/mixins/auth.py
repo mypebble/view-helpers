@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 def already_logged_in(login_function):
     """Wraps login_function with a redirect to the desired URL if the user is
     already logged in.
+    NOTE: login_function must be the function you wish to call. This wrapper
+    does not work with the string format accepted by Django's URL syntax.
     """
     def check_login(request, *args, **kwargs):
         """Checks whether the user is logged in or not. If they are, redirects
