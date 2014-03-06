@@ -71,3 +71,27 @@ class AlreadyLoggedInTestCase(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['next'], '/arbitrary_url/')
+
+
+class LoggedInViewTestCase(TestCase):
+    """Test the logged_in_view function.
+    """
+    def setUp(self):
+        User.objects.create_user('test_user', 'test@example.com', 'password')
+
+        self.client = Client()
+        self.client.login(username='test_user', password='password')
+
+    def test_not_logged_in(self):
+        """Users not logged in will get the not logged in config.
+        """
+        self.client.logout()
+
+        response = self.client.get(reverse('logged-in-view'))
+        self.assertEqual(response.content, 'not logged in class')
+
+    def test_logged_in(self):
+        """Users logged in will get the logged in config.
+        """
+        response = self.client.get(reverse('logged-in-view'))
+        self.assertEqual(response.content, 'logged in class')

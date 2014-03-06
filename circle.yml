@@ -1,0 +1,3 @@
+test:
+    override:
+        - python test_project/manage.py test
