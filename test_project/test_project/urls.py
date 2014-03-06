@@ -2,14 +2,14 @@ from django.conf.urls import url, patterns
 from django.contrib.auth.views import login
 
 
-from pebble_helpers.views.mixins.auth import already_logged_in
+from pebble_helpers.views.mixins.auth import already_logged_in, logged_in_view
 
 from test_project.formtest.views import (FailureUrlView, FailureUrlArgView,
         FailureUrlKwargView, FailureUrlArgKwargView, SuccessUrlView,
         SuccessUrlArgView, SuccessUrlKwargView, SuccessUrlArgKwargView)
 
 from test_project.authtest.views import (LoginRequired, LoginRequiredRedirect,
-        LoginView)
+        LoginView, NotLoggedIn, LoggedIn)
 
 
 urlpatterns = patterns('',
@@ -62,4 +62,10 @@ urlpatterns += patterns('',
     url(r'^settings_defined/$',
         LoginView.as_view(),
         name='settings-defined'),
+)
+
+urlpatterns += patterns('',
+    url(r'^not_logged_in_class/$',
+        logged_in_view(NotLoggedIn.as_view(), LoggedIn.as_view()),
+        name='logged-in-view'),
 )

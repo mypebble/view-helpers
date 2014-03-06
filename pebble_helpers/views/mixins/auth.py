@@ -35,6 +35,22 @@ def already_logged_in(login_function):
     return check_login
 
 
+def logged_in_view(not_logged_in, logged_in):
+    """Wraps two views and returns the correct one depending on whether the
+    user is logged in or not.
+    This can be used if you have a marketing home page that becomes the user's
+    primary dashboard upon login e.g. facebook.com
+    """
+    def check_login(request, *args, **kwargs):
+        """Checks whether the user is logged in and returns the appropriate
+        view.
+        """
+        view = logged_in if request.user.is_authenticated() else not_logged_in
+        return view(request, *args, **kwargs)
+
+    return check_login
+
+
 class LoginRequiredMixin(object):
     """Applies the login_required decorator to the as_view class method of a
     view.
