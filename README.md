@@ -1,6 +1,8 @@
 Pebble View Helpers
 ===================
 
+[![Circle CI](https://circleci.com/gh/mypebble/view-helpers.svg?style=svg)](https://circleci.com/gh/mypebble/view-helpers)
+
 This project is a collection of helper functions and classes that we use
 while developing our Django projects.
 
