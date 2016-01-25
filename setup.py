@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pebble-view-helpers',
-    version='0.0.7',
+    version='0.0.8',
     description="Set of helpers to make working with, and testing, generic views easier",
     author="SF Software limited t/a Pebble",
     author_email="sysadmin@mypebble.co.uk",
