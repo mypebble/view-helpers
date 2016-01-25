@@ -20,8 +20,8 @@ def already_logged_in(login_function):
             redirect_field_name = kwargs.get(
                 'redirect_field_name', REDIRECT_FIELD_NAME)
 
-            redirect_to = request.REQUEST.get(
-                redirect_field_name, settings.LOGIN_REDIRECT_URL)
+            redirect_to = _get_request_key(
+                request, redirect_field_name, settings.LOGIN_REDIRECT_URL)
 
             if not is_safe_url(url=redirect_to, host=request.get_host()):
                 redirect_to = resolve_url(settings.LOGIN_REDIRECT_URL)
@@ -64,5 +64,14 @@ class LoginRequiredMixin(object):
         """
         view = super(LoginRequiredMixin, cls).as_view
         return login_required(
-                view(**initkwargs),
-                redirect_field_name=cls.redirect_field_name)
+            view(**initkwargs),
+            redirect_field_name=cls.redirect_field_name)
+
+
+def _get_request_key(request, key, dflt):
+    """Return the key if it exists in GET or POST on the request. This replaces
+    the request.REQUEST hack.
+    """
+    val = request.GET.get(key)
+    if val is None:
+        return request.POST.get(key, dflt)
