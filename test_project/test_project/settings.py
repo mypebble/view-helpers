@@ -14,11 +14,6 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=test_project',
-]
 
 MANAGERS = ADMINS
 

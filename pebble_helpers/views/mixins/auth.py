@@ -73,5 +73,4 @@ def _get_request_key(request, key, dflt):
     the request.REQUEST hack.
     """
     val = request.GET.get(key)
-    if val is None:
-        return request.POST.get(key, dflt)
+    return request.POST.get(key, dflt) if val is None else val

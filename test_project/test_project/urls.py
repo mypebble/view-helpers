@@ -12,7 +12,7 @@ from test_project.authtest.views import (LoginRequired, LoginRequiredRedirect,
         LoginView, NotLoggedIn, LoggedIn)
 
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^success/plain/$',
         SuccessUrlView.as_view(),
         name='testproject-success-plain'),
@@ -38,9 +38,9 @@ urlpatterns = patterns('',
     url(r'^failure/argkwarg/(?P<i>\d+)/$',
         FailureUrlArgKwargView.as_view(),
         name='testproject-failure-argkwarg'),
-)
+]
 
-urlpatterns += patterns('',
+urlpatterns += [
     url(r'login/$',
         LoginView.as_view(),
         name='login'),
@@ -50,9 +50,9 @@ urlpatterns += patterns('',
     url(r'^auth/redirect/$',
         LoginRequiredRedirect.as_view(),
         name='authtest-redirect'),
-)
+]
 
-urlpatterns += patterns('',
+urlpatterns += [
     url(r'^already_logged_in/$',
         already_logged_in(login),
         name='logged-in'),
@@ -62,10 +62,10 @@ urlpatterns += patterns('',
     url(r'^settings_defined/$',
         LoginView.as_view(),
         name='settings-defined'),
-)
+]
 
-urlpatterns += patterns('',
+urlpatterns += [
     url(r'^not_logged_in_class/$',
         logged_in_view(NotLoggedIn.as_view(), LoggedIn.as_view()),
         name='logged-in-view'),
-)
+]
