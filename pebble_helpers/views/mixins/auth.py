@@ -1,3 +1,6 @@
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.shortcuts import redirect, resolve_url
@@ -73,4 +76,4 @@ def _get_request_key(request, key, dflt):
     the request.REQUEST hack.
     """
     val = request.GET.get(key)
-    return unicode(request.POST.get(key, dflt) if val is None else val)
+    return str(request.POST.get(key, dflt) if val is None else val)
