@@ -16,7 +16,7 @@ def already_logged_in(login_function):
         """Checks whether the user is logged in or not. If they are, redirects
         to the "next" parameter, otherwise displays the login_function.
         """
-        if request.method == 'GET' and request.user.is_authenticated():
+        if request.method == 'GET' and request.user.is_authenticated:
             redirect_field_name = kwargs.get(
                 'redirect_field_name', REDIRECT_FIELD_NAME)
 
@@ -45,7 +45,7 @@ def logged_in_view(not_logged_in, logged_in):
         """Checks whether the user is logged in and returns the appropriate
         view.
         """
-        view = logged_in if request.user.is_authenticated() else not_logged_in
+        view = logged_in if request.user.is_authenticated else not_logged_in
         return view(request, *args, **kwargs)
 
     return check_login
