@@ -1,3 +1,6 @@
+machine:
+    python:
+        version: 3.5.3
 test:
     override:
         - python test_project/manage.py test
