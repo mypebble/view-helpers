@@ -1,11 +1,12 @@
 """Helpers for views that deal with CRUD operations.
 """
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 class RedirectReverseMixin(object):
     """Calls reverse on success/failure URLs passed into the class.
     """
+
     def get_success_url(self):
         """Returns the success URL after reversing the url name passed.
         """

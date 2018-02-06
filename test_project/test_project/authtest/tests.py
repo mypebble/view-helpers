@@ -2,14 +2,15 @@
 """
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
+from django.urls import reverse
 
 
 class LoginRequiredTestCase(TestCase):
     """Test the LoginRequiredMixin.
     """
+
     def setUp(self):
         """Set up the test client.
         """
@@ -38,6 +39,7 @@ class LoginRequiredTestCase(TestCase):
 class AlreadyLoggedInTestCase(TestCase):
     """Test the already_logged_in function.
     """
+
     def setUp(self):
         User.objects.create_user('test_user', 'test@example.com', 'password')
 
@@ -76,6 +78,7 @@ class AlreadyLoggedInTestCase(TestCase):
 class LoggedInViewTestCase(TestCase):
     """Test the logged_in_view function.
     """
+
     def setUp(self):
         User.objects.create_user('test_user', 'test@example.com', 'password')
 
@@ -88,10 +91,10 @@ class LoggedInViewTestCase(TestCase):
         self.client.logout()
 
         response = self.client.get(reverse('logged-in-view'))
-        self.assertEqual(response.content, 'not logged in class')
+        self.assertEqual(response.content, b'not logged in class')
 
     def test_logged_in(self):
         """Users logged in will get the logged in config.
         """
         response = self.client.get(reverse('logged-in-view'))
-        self.assertEqual(response.content, 'logged in class')
+        self.assertEqual(response.content, b'logged in class')

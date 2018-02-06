@@ -1,15 +1,21 @@
-from django.conf.urls import url, patterns
+"""URLs for test projects.
+"""
+from django.conf.urls import url
 from django.contrib.auth.views import login
 
 
 from pebble_helpers.views.mixins.auth import already_logged_in, logged_in_view
 
 from test_project.formtest.views import (FailureUrlView, FailureUrlArgView,
-        FailureUrlKwargView, FailureUrlArgKwargView, SuccessUrlView,
-        SuccessUrlArgView, SuccessUrlKwargView, SuccessUrlArgKwargView)
+                                         FailureUrlKwargView,
+                                         FailureUrlArgKwargView,
+                                         SuccessUrlView,
+                                         SuccessUrlArgView,
+                                         SuccessUrlKwargView,
+                                         SuccessUrlArgKwargView)
 
 from test_project.authtest.views import (LoginRequired, LoginRequiredRedirect,
-        LoginView, NotLoggedIn, LoggedIn)
+                                         LoginView, NotLoggedIn, LoggedIn)
 
 
 urlpatterns = [
